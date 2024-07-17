@@ -1,0 +1,34 @@
+AZ-204
+Container 
+
+https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-app-service/7-create-html-web-app
+
+1) mkdir htmlapp
+2) cd htmlapp
+3) git clone https://github.com/Azure-Samples/html-docs-hello-world.git
+4) 
+resourceGroup=$(az group list --query "[].{id:name}" -o tsv)
+appName=az204app$RANDOM
+5)
+cd html-docs-hello-world
+az webapp up -g $resourceGroup -n $appName --html
+6) Open  htttps://<myAppName>.azurewebsites.net) and Verify
+7) Cloud Shell
+code index.html to Open the Editor
+8) Change Azure App Services - Sample Static HTML site to Azure App Service Updated
+9) Ctrl-S to save
+10) Ctrl-Q to Quit
+11) az webapp up -g $resourceGroup -n $appName --html
+
+Question: 
+ 1. Which of the following App Service plan categories provides the maximum scale-out capabilities? 
+Correct. The Isolated category provides network and compute isolation, and has the maximum scale-out capability.
+2.  Which of the following networking features of App Service can be used to control outbound network traffic? 
+Correct. Hybrid Connections are an outbound network feature.
+
+================================================
+In this module, you learned how to:
+    Describe Azure App Service key components and value.
+    Explain how Azure App Service manages authentication and authorization.
+    Identify methods to control inbound and outbound traffic to your web app.
+    Deploy an app to App Service using Azure CLI commands.
