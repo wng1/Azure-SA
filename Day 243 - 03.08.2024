@@ -1,0 +1,8 @@
+
+Entra ID, Entra Domain Services
+Authentication Methods in Azure, (SSO), (MFA) and passwordless.
+https://learn.microsoft.com/en-gb/training/modules/describe-azure-identity-access-security/1-introduction
+Entra ID is Microsoft's cloud-based identity and access management service.
+With Microsoft Entra ID, you control identity accounts, but Microsoft ensures the service is available globally. 
+if you connec your microsoft active directory to Entra ID, they will help protect you by detecting suspicious sign-in attempts at no extra cost.
+Microsoft Entra Connect (if you want to link AD identities to Entra on CLoud)
