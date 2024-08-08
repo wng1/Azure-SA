@@ -1,0 +1,13 @@
+General process of establishing rules and policies.
+Governance ensures those rules and policies are enforced.
+A good governance strategy helps you maintain control over the applications and resources that you manage in the cloud. 
+Maintaining control over your environment ensures that you stay compliant with:
+- industry standards, such as informaton security management
+- corporate or organizational standards, such as ensuring that network data is encryted.
+
+https://learn.microsoft.com/en-gb/training/modules/design-governance/1-introduction 
+
+To effectively apply your governance strategies, you must first create a hierarchical structure for your organizaitonal environment. 
+This structure lets you apply governance strategies exactly where they're needed. The governance strategies we cover in this module are Azure Policy and Resource tags.
+https://learn.microsoft.com/en-gb/training/modules/design-governance/5-design-for-resource-groups 
+https://learn.microsoft.com/en-gb/training/modules/design-governance/6-design-for-resource-tags
