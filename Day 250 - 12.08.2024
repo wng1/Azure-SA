@@ -1,0 +1,31 @@
+https://learn.microsoft.com/en-gb/training/modules/design-data-storage-solution-for-relational-data/1-introduction
+
+Reduce overheard > Azure SQL Managed Instance  > Move on-premise to cloud -> 1.5TB data smoothly,    company gains automatic patching and version updates, automated backups, high availabitliy and reduced management overhead
+instance-scoped features like the Service Broker
+https://learn.microsoft.com/en-gb/training/modules/design-data-storage-solution-for-relational-data/6-recommend-database-availability
+Data Transfer --> Data security (at rest, in motion (TLS) - transport layer security, in process)
+https://learn.microsoft.com/en-gb/training/modules/design-data-storage-solution-for-relational-data/7-design-security-for-data-at-rest-data-transmission-data-use 
+https://learn.microsoft.com/en-gb/training/modules/design-data-storage-solution-for-relational-data/11-summary-resources
+https://learn.microsoft.com/en-gb/training/modules/design-data-storage-solution-for-non-relational-data/2-design-for-data-storage 
+https://learn.microsoft.com/en-gb/training/modules/design-data-storage-solution-for-non-relational-data/3-design-for-azure-storage-accounts
+Data Integration
+https://learn.microsoft.com/en-gb/training/modules/design-data-integration/
+https://learn.microsoft.com/en-gb/training/modules/design-data-integration/2-solution-azure-data-factory 
+https://learn.microsoft.com/en-gb/training/modules/design-data-integration/3-solution-azure-data-lake
+https://learn.microsoft.com/en-gb/training/modules/design-data-integration/5-solution-azure-synapse-analytics
+https://learn.microsoft.com/en-gb/training/modules/design-data-integration/6-design-strategy-for-hot-warm-cold-data-path
+https://learn.microsoft.com/en-gb/training/modules/design-data-integration/7-design-azure-stream-analytics-solution-for-data-analysis
+Design Apllication architecture
+https://learn.microsoft.com/en-gb/training/modules/design-application-architecture/
+Design an Azure compute solution
+https://learn.microsoft.com/en-gb/training/modules/design-compute-solution/2-choose-compute-service 
+Data Migration
+https://learn.microsoft.com/en-gb/training/modules/design-migrations/2-evaluate-migration-cloud-adoption-framework
+Migration waves (releases) - repeatable processes for iterative change management and digital transformation.
+
+Migration efffort (iterations) 
+1) Assess workloads - Assess each batch of workload to evaluate cost, architeture, & deployment tooling
+2) Deploy workloads - Replicate functionality in the cloud using IaaS, PaaS, cloud-native or other modernization solutions
+3) Release workloads - Test, optimize, document & review. Release by handing off for governance management & security.
+https://learn.microsoft.com/en-gb/training/modules/design-migrations/3-describe-azure-migration-framework
+
