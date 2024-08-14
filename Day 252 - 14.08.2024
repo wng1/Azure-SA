@@ -1,0 +1,142 @@
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/03b-medallion-lakehouse.html
+
+Fabric Home Page > Synpase Data Engineering > Workspaces
+Create Lakehouse - Sales
+https://github.com/MicrosoftLearning/dp-data/blob/main/orders.zip
+Files > SubFolder - Bronze
+
+from pyspark.sql.types import *
+
+ orderSchema = StructType([
+     StructField("SalesOrderNumber", StringType()),
+     StructField("SalesOrderLineNumber", IntegerType()),
+     StructField("OrderDate", DateType()),
+     StructField("CustomerName", StringType()),
+     StructField("Email", StringType()),
+     StructField("Item", StringType()),
+     StructField("Quantity", IntegerType()),
+     StructField("UnitPrice", FloatType()),
+     StructField("Tax", FloatType())
+     ])
+df = spark.read.format("csv").option("header", "true").schema(orderSchema).load("Files/bronze/*.csv")
+display(df.head(10))
+
+from pyspark.sql.functions import when, lit, col, current_timestamp, input_file_name
+df = df.withColumn("Filename", input_file_name()) \
+.withColumn("IsFlagged", when(col("OrderDate") < '2019-08-01', True).otherwise(False)) \
+.withColumn("CreatedTS", current_timestamp()).withColumn("ModifiedTS", current_timestamp())
+df = df.withColumn("CustomerName", when((col("CustomerName").isNull() | col("CustomerName")==""
+
+ # Define the schema for the sales_silver table
+    
+ from pyspark.sql.types import *
+ from delta.tables import *
+    
+ DeltaTable.createIfNotExists(spark) \
+     .tableName("sales.sales_silver") \
+     .addColumn("SalesOrderNumber", StringType()) \
+     .addColumn("SalesOrderLineNumber", IntegerType()) \
+     .addColumn("OrderDate", DateType()) \
+     .addColumn("CustomerName", StringType()) \
+     .addColumn("Email", StringType()) \
+     .addColumn("Item", StringType()) \
+     .addColumn("Quantity", IntegerType()) \
+     .addColumn("UnitPrice", FloatType()) \
+     .addColumn("Tax", FloatType()) \
+     .addColumn("FileName", StringType()) \
+     .addColumn("IsFlagged", BooleanType()) \
+     .addColumn("CreatedTS", DateType()) \
+     .addColumn("ModifiedTS", DateType()) \
+     .execute()
+
+ SELECT YEAR(OrderDate) AS Year
+     , CAST (SUM(Quantity * (UnitPrice + Tax)) AS DECIMAL(12, 2)) AS TotalSales
+ FROM sales_silver
+ GROUP BY YEAR(OrderDate) 
+ ORDER BY YEAR(OrderDate)
+
+ SELECT TOP 10 CustomerName, SUM(Quantity) AS TotalQuantity
+ FROM sales_silver
+ GROUP BY CustomerName
+ ORDER BY TotalQuantity DESC
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/03b-medallion-lakehouse.html#transform-data-and-load-to-silver-delta-table
+
+
+ # Load data to the dataframe as a starting point to create the gold layer
+ df = spark.read.table("Sales.sales_silver")
+
+ from pyspark.sql.types import *
+ from delta.tables import*
+    
+ # Define the schema for the dimdate_gold table
+ DeltaTable.createIfNotExists(spark) \
+     .tableName("sales.dimdate_gold") \
+     .addColumn("OrderDate", DateType()) \
+     .addColumn("Day", IntegerType()) \
+     .addColumn("Month", IntegerType()) \
+     .addColumn("Year", IntegerType()) \
+     .addColumn("mmmyyyy", StringType()) \
+     .addColumn("yyyymm", StringType()) \
+     .execute()
+
+ from pyspark.sql.functions import col, dayofmonth, month, year, date_format
+    
+ # Create dataframe for dimDate_gold
+    
+ dfdimDate_gold = df.dropDuplicates(["OrderDate"]).select(col("OrderDate"), \
+         dayofmonth("OrderDate").alias("Day"), \
+         month("OrderDate").alias("Month"), \
+         year("OrderDate").alias("Year"), \
+         date_format(col("OrderDate"), "MMM-yyyy").alias("mmmyyyy"), \
+         date_format(col("OrderDate"), "yyyyMM").alias("yyyymm"), \
+     ).orderBy("OrderDate")
+
+ # Display the first 10 rows of the dataframe to preview your data
+
+ display(dfdimDate_gold.head(10))
+
+https://learn.microsoft.com/en-gb/training/modules/get-started-kusto-fabric/4-write-queries-kusto-query-language
+
+.create table sales(
+	SalesOrderNumber: string,
+	SalesOrderLineItem: int,
+	OrderDate: datetime,
+	CustomerName: string,
+	EmailAddress: string,
+	Item: string,
+	Quantity: int,
+	UnitPrice: real,
+	TaxAmount: real)
+
+.ingest into tables sales 'https://...'
+with (ignoreFirstRecord = true)
+
+sales
+
+sales
+| take 5
+
+sales 
+| where Item contains = 'Mountain-100'
+
+sales
+| where OrderDate between (now(-1d)..(now())
+
+sales
+| where Item contains 'Mountain-100'
+| sort by OrderDate desc
+
+sales
+| summarize ItemsSold= sum(Quantity) by Item
+
+
+Using Co-pilot.     Can you give me the statistics of trips table
+
+ 
+https://learn.microsoft.com/en-gb/training/modules/get-started-kusto-fabric/5-exercise-use-kusto-query-data-onelake
+
+https://microsoftlearning.github.io/mslearn-fabric/Instructions/Labs/07-real-time-Intelligence.html
+
+
+
